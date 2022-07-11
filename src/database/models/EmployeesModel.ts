@@ -1,7 +1,7 @@
 import {DataTypes, Model, Optional} from 'sequelize'
 import {sequelize} from '../sequelize'
 
-interface EmployeesAttributes{
+interface EmployeesModel {
     employeeNumber: number
     lastName: string
     firstName: string
@@ -9,10 +9,10 @@ interface EmployeesAttributes{
     email: string
     jobTitle: string
 }
-export interface EmployeesInput extends Optional<EmployeesAttributes, 'employeeNumber'>{}
-export interface EmployeesOutput extends Required<EmployeesAttributes>{}
+export interface EmployeesInput extends Optional<EmployeesModel, 'employeeNumber'>{}
+export interface EmployeesOutput extends Required<EmployeesModel>{}
 
-class Employees extends Model<EmployeesAttributes, EmployeesInput> {
+class Employees extends Model<EmployeesModel, EmployeesInput> {
     declare employeeNumber: number
     declare lastName: string
     declare firstName: string

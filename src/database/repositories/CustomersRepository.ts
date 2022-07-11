@@ -1,8 +1,6 @@
 import AppError from '../../utils/AppError'
 import Model, {CustomersInput, CustomersOutput} from '../models/CustomersModel'
 
-
-
 export const getAll = async (): Promise<CustomersOutput[]> =>{
     return await Model.findAll()
 }

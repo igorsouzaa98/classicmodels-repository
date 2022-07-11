@@ -1,4 +1,3 @@
-
 // @ts-ignore
 import express, {Express, NextFunction, Request, Response} from 'express'
 import 'express-async-errors'

@@ -3,7 +3,7 @@ import Model, {PaymentsInput, PaymentsOutput} from '../models/PaymentsModel'
 
 
 
-export const getAll = async (): Promise<PaymentsInput[]> =>{
+export const getAll = async (): Promise<PaymentsOutput[]> =>{
     return await Model.findAll()
 }
 

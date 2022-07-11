@@ -13,8 +13,8 @@ export const CustomersCreateValidation = celebrate({
         state: Joi.string().required(),
         postalCode: Joi.string().required(),
         country: Joi.string().required(),
-        creditLimit: Joi.string().required(),
-    }),
+        creditLimit: Joi.string().required()
+    })
 })
 
 export const CustomersUpdateValidation = celebrate({
@@ -30,6 +30,6 @@ export const CustomersUpdateValidation = celebrate({
         state: Joi.string(),
         postalCode: Joi.string(),
         country: Joi.string(),
-        creditLimit: Joi.string(),
-    }).min(1),
+        creditLimit: Joi.string()
+    }).min(1)
 })

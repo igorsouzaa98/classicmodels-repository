@@ -18,6 +18,6 @@ export const EmployeesUpdateValidation = celebrate({
         firstName: Joi.string(),
         extension: Joi.string(),
         email: Joi.string(),
-        jobTitle: Joi.string(),
+        jobTitle: Joi.string()
     }).min(1)
 })

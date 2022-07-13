@@ -4,6 +4,7 @@ import {sequelize} from '../sequelize'
 interface ProductsAttributes{
     productCode: string,
     productName: string,
+    productLine: string,
     productScale: string,
     productVendor: string,
     productDescription: string,
@@ -17,6 +18,7 @@ export interface ProductsOutput extends Required<ProductsAttributes>{}
 class Products extends Model<ProductsAttributes, ProductsInput> {
     declare productCode: string
     declare productName: string
+    declare productLine: string
     declare productScale: string
     declare productVendor: string
     declare productDescription: string
@@ -25,14 +27,15 @@ class Products extends Model<ProductsAttributes, ProductsInput> {
     declare MSRP: number
 }
 Products.init({
-    productCode: { type: DataTypes.STRING, primaryKey: true, autoIncrement: true, },
-    productName: { type: DataTypes.STRING },
-    productScale: { type: DataTypes.STRING },
-    productVendor: { type: DataTypes.STRING },
-    productDescription: { type: DataTypes.STRING },
-    quantityInStock: { type: DataTypes.NUMBER },
-    buyPrice: { type: DataTypes.NUMBER },
-    MSRP: { type: DataTypes.NUMBER }
+    productCode: { type: DataTypes.STRING(15), primaryKey: true, autoIncrement: true, },
+    productName: { type: DataTypes.STRING(70), allowNull: false },
+    productLine: { type: DataTypes.STRING(50), allowNull: false },
+    productScale: { type: DataTypes.STRING(10), allowNull: false },
+    productVendor: { type: DataTypes.STRING(50), allowNull: false },
+    productDescription: { type: DataTypes.TEXT },
+    quantityInStock: { type: DataTypes.SMALLINT },
+    buyPrice: { type: DataTypes.DECIMAL(10,2) },
+    MSRP: { type: DataTypes.DECIMAL(10,2) }
 }, {
     sequelize,
     modelName:'products'

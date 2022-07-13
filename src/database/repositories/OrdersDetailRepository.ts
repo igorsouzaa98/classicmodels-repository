@@ -1,12 +1,14 @@
 import AppError from '../../utils/AppError'
-import Model, {ProductlinesInput, ProductlinesOutput} from '../models/ProductlinesModel'
+import Model, {OrdersDetailsInput, OrdersDetailsOutput} from '../models/OrdersDetailsModel'
 
 
-export const getAll = async (): Promise<ProductlinesOutput[]> =>{
+
+
+export const getAll = async (): Promise<OrdersDetailsOutput[]> =>{
     return await Model.findAll()
 }
 
-export const getById = async (id: string): Promise<ProductlinesOutput> =>{
+export const getById = async (id: number): Promise<OrdersDetailsOutput> =>{
     const customer = await Model.findByPk(id)
 
     if(!customer){
@@ -15,11 +17,11 @@ export const getById = async (id: string): Promise<ProductlinesOutput> =>{
     return customer
 }
 
-export const create = async (payload: ProductlinesInput): Promise<ProductlinesOutput> =>{
+export const create = async (payload: OrdersDetailsInput): Promise<OrdersDetailsOutput> =>{
     return await Model.create(payload)
 }
 
-export const updateById = async (id: string, payload: ProductlinesInput): Promise<ProductlinesOutput> =>{
+export const updateById = async (id: number, payload: OrdersDetailsInput): Promise<OrdersDetailsOutput> =>{
     const customer = await Model.findByPk(id)
 
     if(!customer){
@@ -28,7 +30,7 @@ export const updateById = async (id: string, payload: ProductlinesInput): Promis
     return await customer.update(payload)
 }
 
-export const deleteById = async (id:string): Promise<void> =>{
+export const deleteById = async (id:number): Promise<void> =>{
     const customer = await  Model.findByPk(id)
 
     if(!customer){

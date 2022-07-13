@@ -7,7 +7,9 @@ import connection from './database/sequelize'
 // @ts-ignore
 import routes from './api/routes/index'
 import AppError from './utils/AppError'
-import {errors} from "celebrate";
+import {errors} from 'celebrate'
+import {initdb} from './database/initdb'
+
 
 
 const app:Express = express()
@@ -41,3 +43,4 @@ app.listen(port, ()=>{
 })
 
 connection()
+initdb()

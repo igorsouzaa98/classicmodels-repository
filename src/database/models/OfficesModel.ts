@@ -1,13 +1,14 @@
 import {DataTypes, Model, Optional} from 'sequelize'
 import {sequelize} from '../sequelize'
+import Employees from './EmployeesModel'
 
 interface OfficesAttributes{
     officeCode: number,
     city: string,
     phone: string,
     addressLine1: string,
-    addressLine2: string,
-    state: string,
+    addressLine2?: string,
+    state?: string,
     postalCode: string,
     country: string,
     territory: string
@@ -29,17 +30,20 @@ class Offices extends Model<OfficesAttributes, OfficesInput> {
 
 Offices.init({
     officeCode: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, },
-    city: { type: DataTypes.STRING },
-    phone: { type: DataTypes.STRING },
-    addressLine1: { type: DataTypes.STRING },
-    addressLine2: { type: DataTypes.STRING },
-    state: { type: DataTypes.STRING },
-    postalCode: { type: DataTypes.STRING },
-    country: { type: DataTypes.STRING },
-    territory: { type: DataTypes.STRING }
+    city: { type: DataTypes.STRING(50), allowNull:false },
+    phone: { type: DataTypes.STRING(50), allowNull:false },
+    addressLine1: { type: DataTypes.STRING(50), allowNull:false },
+    addressLine2: { type: DataTypes.STRING(50) },
+    state: { type: DataTypes.STRING(50) },
+    postalCode: { type: DataTypes.STRING(15), allowNull:false },
+    country: { type: DataTypes.STRING(50), allowNull:false },
+    territory: { type: DataTypes.STRING(10), allowNull:false },
 },{
     sequelize,
     modelName:'offices'
 })
+
+Employees.hasMany(Offices, {foreignKey: 'employeeNumber'})
+Offices.belongsTo(Employees, {foreignKey: 'officeCode'})
 
 export default Offices

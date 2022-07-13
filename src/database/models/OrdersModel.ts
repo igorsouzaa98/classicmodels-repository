@@ -1,13 +1,14 @@
 import {DataTypes, Model, Optional} from 'sequelize'
 import {sequelize} from '../sequelize'
+import Customers from './CustomersModel'
 
 interface OrdersAttributes{
     orderNumber: number,
-    orderDate: string,
-    requiredDate: string,
-    shippedDate: string,
-    status: string,
-    comments: string,
+    orderDate?: string,
+    requiredDate?: string,
+    shippedDate?: string,
+    status?: string,
+    comments?: string,
     customerNumber: number
 }
 export interface OrdersInput extends Optional<OrdersAttributes, 'orderNumber'>{}
@@ -35,5 +36,8 @@ Orders.init({
     sequelize,
     modelName:'orders'
 })
+
+Customers.hasMany(Orders, {foreignKey: 'customerNumber'})
+Orders.belongsTo(Customers, {foreignKey: 'customerNumber'})
 
 export default Orders

@@ -6,7 +6,7 @@ export const getAll = async (req: Request, res: Response) => {
 }
 
 export const getById = async (req: Request, res: Response, next: NextFunction) => {
-    res.send(await service.getById(parseInt(req.params.id)))
+    res.send(await service.getById(req.params.id))
 }
 
 export const create = async (req: Request, res: Response) => {
@@ -14,10 +14,10 @@ export const create = async (req: Request, res: Response) => {
 }
 
 export const updateById = async (req: Request, res: Response) => {
-    res.send(await service.updateById(parseInt(req.params.id), req.body))
+    res.send(await service.updateById(req.params.id, req.body))
 }
 
 export const deleteById = async (req: Request, res: Response) => {
-    await service.deleteById(parseInt(req.params.id))
+    await service.deleteById(req.params.id)
     res.status(204).send()
 }

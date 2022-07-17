@@ -1,5 +1,6 @@
 import AppError from '../../utils/AppError'
 import Model, {ProductsInput, ProductsOutput} from '../models/ProductsModel'
+import Orders from "../models/OrdersModel";
 
 
 export const getAll = async (): Promise<ProductsOutput[]> =>{
@@ -7,12 +8,17 @@ export const getAll = async (): Promise<ProductsOutput[]> =>{
 }
 
 export const getById = async (id: string): Promise<ProductsOutput> =>{
-    const customer = await Model.findByPk(id)
+    const products = await Model.findOne({
+        where:{
+            productCode:id
+        },
+        include:Orders
+    })
 
-    if(!customer){
+    if(!products){
         throw new AppError('NotFoundError', 'Register not found', 404)
     }
-    return customer
+    return products
 }
 
 export const create = async (payload: ProductsInput): Promise<ProductsOutput> =>{
@@ -20,19 +26,19 @@ export const create = async (payload: ProductsInput): Promise<ProductsOutput> =>
 }
 
 export const updateById = async (id: string, payload: ProductsInput): Promise<ProductsOutput> =>{
-    const customer = await Model.findByPk(id)
+    const products = await Model.findByPk(id)
 
-    if(!customer){
+    if(!products){
         throw new AppError('NotFoundError', 'Register not found', 404)
     }
-    return await customer.update(payload)
+    return await products.update(payload)
 }
 
 export const deleteById = async (id:string): Promise<void> =>{
-    const customer = await  Model.findByPk(id)
+    const products = await  Model.findByPk(id)
 
-    if(!customer){
+    if(!products){
         throw new AppError('NotFoundError', 'Register not found', 404)
     }
-    return await customer.destroy()
+    return await products.destroy()
 }

@@ -42,5 +42,4 @@ app.listen(port, ()=>{
     console.log(`Server live on port ${port}`)
 })
 
-connection()
 initdb()

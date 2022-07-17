@@ -5,13 +5,16 @@ export const sequelize = new Sequelize('classicmodels', 'root', '123456',{
     dialect:'mysql',
     define:{
         freezeTableName:true,
-        timestamps:false,
+        //  timestamps:false,
+        createdAt:false,
+        updatedAt:false
     },
+    timezone:'-03:00',
     logging:false
 })
 
-export default () =>{
-    sequelize
+export default async () =>{
+   await sequelize
         .authenticate()
         .then(()=>{
             console.log('Successful  connection')

@@ -34,7 +34,8 @@ Orders.init({
     customerNumber: { type: DataTypes.NUMBER }
 }, {
     sequelize,
-    modelName:'orders'
+    modelName:'orders',
+    paranoid: true
 })
 
 Customers.hasMany(Orders, {foreignKey: 'customerNumber'})

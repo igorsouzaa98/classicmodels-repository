@@ -5,7 +5,7 @@ export const getAll = async (): Promise<ProductlinesOutput[]> => {
     return await repository.getAll()
 }
 
-export const getById = async (id: number): Promise<ProductlinesOutput> => {
+export const getById = async (id: string): Promise<ProductlinesOutput> => {
     return await repository.getById(id)
 }
 
@@ -13,10 +13,10 @@ export const create = async (payload: ProductlinesInput): Promise<ProductlinesOu
     return repository.create(payload)
 }
 
-export const updateById = async (id: number, payload: ProductlinesInput): Promise<ProductlinesOutput> => {
+export const updateById = async (id: string, payload: ProductlinesInput): Promise<ProductlinesOutput> => {
     return await repository.updateById(id, payload)
 }
 
-export const deleteById = async (id: number): Promise<void> => {
+export const deleteById = async (id: string): Promise<void> => {
     await repository.deleteById(id)
 }

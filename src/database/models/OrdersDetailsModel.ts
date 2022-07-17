@@ -44,6 +44,7 @@ OrdersDetails.init(
         modelName: 'orderdetails',
     }
 )
+OrdersDetails.removeAttribute('id')
 
 Orders.belongsToMany(Products, { foreignKey: 'orderNumber', through: OrdersDetails })
 Products.belongsToMany(Orders, { foreignKey: 'productCode', through: OrdersDetails })

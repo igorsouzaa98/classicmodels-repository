@@ -7,12 +7,12 @@ export const getAll = async (): Promise<EmployeesOutput[]> =>{
 }
 
 export const getById = async (id: number): Promise<EmployeesOutput> =>{
-    const customer = await Model.findByPk(id)
+    const employees = await Model.findByPk(id)
 
-    if(!customer){
+    if(!employees){
         throw new AppError('NotFoundError', 'Register not found', 404)
     }
-    return customer
+    return employees
 }
 
 export const create = async (payload: EmployeesInput): Promise<EmployeesOutput> =>{
@@ -20,19 +20,19 @@ export const create = async (payload: EmployeesInput): Promise<EmployeesOutput> 
 }
 
 export const updateById = async (id: number, payload: EmployeesInput): Promise<EmployeesOutput> =>{
-    const customer = await Model.findByPk(id)
+    const employees = await Model.findByPk(id)
 
-    if(!customer){
+    if(!employees){
         throw new AppError('NotFoundError', 'Register not found', 404)
     }
-    return await customer.update(payload)
+    return await employees.update(payload)
 }
 
 export const deleteById = async (id:number): Promise<void> =>{
-    const customer = await  Model.findByPk(id)
+    const employees = await  Model.findByPk(id)
 
-    if(!customer){
+    if(!employees){
         throw new AppError('NotFoundError', 'Register not found', 404)
     }
-    return await customer.destroy()
+    return await employees.destroy()
 }

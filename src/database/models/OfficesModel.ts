@@ -40,10 +40,9 @@ Offices.init({
     territory: { type: DataTypes.STRING(10), allowNull:false },
 },{
     sequelize,
-    modelName:'offices'
+    modelName:'offices',
+    paranoid:true
 })
 
-Employees.hasMany(Offices, {foreignKey: 'employeeNumber'})
-Offices.belongsTo(Employees, {foreignKey: 'officeCode'})
 
 export default Offices

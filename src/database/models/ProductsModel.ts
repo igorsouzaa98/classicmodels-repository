@@ -1,5 +1,6 @@
 import {DataTypes, Model, Optional} from 'sequelize'
 import {sequelize} from '../sequelize'
+import ProductLines from "./ProductlinesModel";
 
 interface ProductsAttributes{
     productCode: string,
@@ -38,7 +39,10 @@ Products.init({
     MSRP: { type: DataTypes.DECIMAL(10,2) }
 }, {
     sequelize,
-    modelName:'products'
+    modelName:'products',
 })
+
+Products.hasMany(ProductLines,{foreignKey: 'productLine'})
+ProductLines.belongsTo(Products, {foreignKey:'productLine'})
 
 export default Products

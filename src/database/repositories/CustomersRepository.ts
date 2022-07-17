@@ -1,12 +1,18 @@
 import AppError from '../../utils/AppError'
 import Model, {CustomersInput, CustomersOutput} from '../models/CustomersModel'
+import Orders from "../models/OrdersModel";
 
 export const getAll = async (): Promise<CustomersOutput[]> =>{
     return await Model.findAll()
 }
 
 export const getById = async (id: number): Promise<CustomersOutput> =>{
-    const customer = await Model.findByPk(id)
+    const customer = await Model.findOne({
+        where:{
+            customerNumber:id
+        },
+        include:{all: true, nested: true}
+    })
 
     if(!customer){
         throw new AppError('NotFoundError', 'Register not found', 404)

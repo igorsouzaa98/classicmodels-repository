@@ -1,5 +1,6 @@
 import AppError from '../../utils/AppError'
 import Model, {OfficesInput, OfficesOutput} from '../models/OfficesModel'
+import Employees from '../models/EmployeesModel'
 
 
 
@@ -8,12 +9,18 @@ export const getAll = async (): Promise<OfficesOutput[]> =>{
 }
 
 export const getById = async (id: number): Promise<OfficesOutput> =>{
-    const customer = await Model.findByPk(id)
+    const offices = await Model.findOne({
+        where:{
+            officeCode:id
+        },
+        include: Employees
 
-    if(!customer){
+    })
+
+    if(!offices){
         throw new AppError('NotFoundError', 'Register not found', 404)
     }
-    return customer
+    return offices
 }
 
 export const create = async (payload: OfficesInput): Promise<OfficesOutput> =>{
@@ -21,19 +28,19 @@ export const create = async (payload: OfficesInput): Promise<OfficesOutput> =>{
 }
 
 export const updateById = async (id: number, payload: OfficesInput): Promise<OfficesOutput> =>{
-    const customer = await Model.findByPk(id)
+    const offices = await Model.findByPk(id)
 
-    if(!customer){
+    if(!offices){
         throw new AppError('NotFoundError', 'Register not found', 404)
     }
-    return await customer.update(payload)
+    return await offices.update(payload)
 }
 
 export const deleteById = async (id:number): Promise<void> =>{
-    const customer = await  Model.findByPk(id)
+    const offices = await  Model.findByPk(id)
 
-    if(!customer){
+    if(!offices){
         throw new AppError('NotFoundError', 'Register not found', 404)
     }
-    return await customer.destroy()
+    return await offices.destroy()
 }

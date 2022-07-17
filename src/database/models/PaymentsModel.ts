@@ -19,12 +19,8 @@ class Payments extends Model<PaymentsAttributes, PaymentsInput>{
 }
 
 Payments.init({
-    customerNumber: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-    },
-    checkNumber: { type: DataTypes.STRING, primaryKey: true, autoIncrement: true },
+    customerNumber: {type: DataTypes.INTEGER},
+    checkNumber: { type: DataTypes.STRING(50)},
     paymentDate: { type: DataTypes.DATE, allowNull: false },
     amount: { type: DataTypes.DECIMAL(10,2), allowNull: false },
 },{
@@ -32,6 +28,9 @@ Payments.init({
     modelName:'payments'
 })
 
-Customers.hasMany(Payments, {foreignKey:'customerNumber'})
-Payments.belongsTo(Customers, {foreignKey:'checkNumber'})
+Payments.removeAttribute('id')
+
+Customers.hasOne(Payments, {foreignKey:'customerNumber'})
+Payments.belongsTo(Customers, {foreignKey:'customerNumber'})
+
 export default Payments

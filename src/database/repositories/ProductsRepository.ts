@@ -1,10 +1,18 @@
 import AppError from '../../utils/AppError'
 import Model, {ProductsInput, ProductsOutput} from '../models/ProductsModel'
 import Orders from "../models/OrdersModel";
+import {Op} from "sequelize";
 
 
-export const getAll = async (): Promise<ProductsOutput[]> =>{
-    return await Model.findAll()
+export const getAll = async (qntLimitMin:string, qntLimitMax:string): Promise<ProductsOutput[]> =>{
+    const qntMin = parseInt(qntLimitMin)
+    const qntMax = parseInt(qntLimitMax)
+
+    return await Model.findAll({
+        where:{
+            quantityInStock:{[Op.between]:[qntMin, qntMax]}
+        }
+    })
 }
 
 export const getById = async (id: string): Promise<ProductsOutput> =>{

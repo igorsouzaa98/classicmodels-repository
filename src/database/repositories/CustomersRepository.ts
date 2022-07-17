@@ -1,9 +1,29 @@
 import AppError from '../../utils/AppError'
 import Model, {CustomersInput, CustomersOutput} from '../models/CustomersModel'
-import Orders from "../models/OrdersModel";
+import {Query} from '../../shared/types/pagination'
+import {GetPagination} from '../../utils/getPagination'
+import {Op} from 'sequelize'
 
-export const getAll = async (): Promise<CustomersOutput[]> =>{
-    return await Model.findAll()
+
+export const getAll = async (customerName:string, creditLimitMin: string, creditLimitMax: string, query: Query): Promise<{rows: CustomersOutput[], count: number}> =>{
+    let {size, page, sort, order, ...filters} = query
+
+    const creditMin = parseInt(creditLimitMin)
+    const creditMax = parseInt(creditLimitMax)
+
+    const id  = 'customerNumber'
+    const {...pagination}  =  GetPagination(id, query)
+
+    if(!customerName) customerName = ''
+
+    return await Model.findAndCountAll({
+        where:{
+            customerName:{[Op.like]:`%${customerName}%`},
+            creditLimit: {[Op.between]: [creditMin, creditMax]},
+            ...filters
+        },
+        ...pagination
+    })
 }
 
 export const getById = async (id: number): Promise<CustomersOutput> =>{

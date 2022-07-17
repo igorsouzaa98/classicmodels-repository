@@ -1,8 +1,8 @@
 import {OrdersOutput, OrdersInput} from '../database/models/OrdersModel'
 import * as repository from '../database/repositories/OrdersRepository'
 
-export const getAll = async (): Promise<OrdersOutput[]> => {
-    return await repository.getAll()
+export const getAll = async (dateLimitMin: string, dateLimitMax: string): Promise<OrdersOutput[]> => {
+    return await repository.getAll(dateLimitMin,dateLimitMax)
 }
 
 export const getById = async (id: number): Promise<OrdersOutput> => {

@@ -2,7 +2,8 @@ import { Request, Response, NextFunction } from 'express'
 import * as service from '../../services/OrdersService'
 
 export const getAll = async (req: Request, res: Response) => {
-    res.send(await service.getAll())
+    const {dateLimitMin, dateLimitMax} =  req.query
+    res.send(await service.getAll(dateLimitMin as string, dateLimitMax as string))
 }
 
 export const getById = async (req: Request, res: Response, next: NextFunction) => {

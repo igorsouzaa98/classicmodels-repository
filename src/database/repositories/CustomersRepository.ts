@@ -5,16 +5,19 @@ import {GetPagination} from '../../utils/getPagination'
 import {Op} from 'sequelize'
 
 
-export const getAll = async (customerName:string, creditLimitMin: string, creditLimitMax: string, query: Query): Promise<{rows: CustomersOutput[], count: number}> =>{
+export const getAll = async (customerName:string, creditLimitMin: string, creditLimitMax: string, creditLimit: string, query: Query): Promise<{rows: CustomersOutput[], count: number}> =>{
     let {size, page, sort, order, ...filters} = query
 
-    const creditMin = parseInt(creditLimitMin)
-    const creditMax = parseInt(creditLimitMax)
+    if(!creditLimitMin) creditLimitMin = '0'
+    if(!creditLimitMax) creditLimitMax = '99999999999'
+
+    let creditMin = parseInt(creditLimitMin)
+    let creditMax = parseInt(creditLimitMax)
 
     const id  = 'customerNumber'
     const {...pagination}  =  GetPagination(id, query)
 
-    if(!customerName) customerName = ''
+    if(!customerName) customerName = ' '
 
     return await Model.findAndCountAll({
         where:{

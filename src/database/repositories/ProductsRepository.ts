@@ -5,6 +5,10 @@ import {Op} from "sequelize";
 
 
 export const getAll = async (qntLimitMin:string, qntLimitMax:string): Promise<ProductsOutput[]> =>{
+
+    if (!qntLimitMin) qntLimitMin = '0'
+    if (!qntLimitMax) qntLimitMax = '99999999'
+
     const qntMin = parseInt(qntLimitMin)
     const qntMax = parseInt(qntLimitMax)
 

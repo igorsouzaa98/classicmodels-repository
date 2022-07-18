@@ -4,6 +4,9 @@ import Products from "../models/ProductsModel";
 import {Op} from "sequelize";
 
 export const getAll = async (dateLimitMin:string, dateLimitMax:string): Promise<OrdersOutput[]> =>{
+
+    if (!dateLimitMin) dateLimitMin = '0'
+    if(!dateLimitMax) dateLimitMax = '999999999'
     return await Model.findAll({
         where:{
             orderDate:{[Op.between]:[dateLimitMin, dateLimitMax]}

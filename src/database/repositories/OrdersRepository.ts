@@ -7,6 +7,7 @@ export const getAll = async (dateLimitMin:string, dateLimitMax:string): Promise<
 
     if (!dateLimitMin) dateLimitMin = '0'
     if(!dateLimitMax) dateLimitMax = '999999999'
+
     return await Model.findAll({
         where:{
             orderDate:{[Op.between]:[dateLimitMin, dateLimitMax]}

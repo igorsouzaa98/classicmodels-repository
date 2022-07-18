@@ -7,6 +7,7 @@ import Employees from "./models/EmployeesModel";
 import Products from "./models/ProductsModel";
 import ProductLines from "./models/ProductlinesModel";
 import Offices from "./models/OfficesModel";
+import User from "./models/UserModel";
 
 export const initdb = async ()=>{
     Promise.all([
@@ -19,7 +20,8 @@ export const initdb = async ()=>{
         await Employees.sync({alter:true}),
         await Products.sync({alter:true}),
         await ProductLines.sync({alter:true}),
-        await Offices.sync({alter:true})
+        await Offices.sync({alter:true}),
+        await User.sync({alter:true})
     ]).then(()=>{
         console.log('Successfully synchronized tables')
     })

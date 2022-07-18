@@ -6,6 +6,7 @@ import offices from './routesTables/OfficesRoute'
 import productlines from './routesTables/ProductlinesRoute'
 import orders from './routesTables/OrdersRoute'
 import payments from './routesTables/PaymentsRoute'
+import auth from './routesTables/AuthRoute'
 
 
 
@@ -18,5 +19,6 @@ routes.use('/offices', offices)
 routes.use('/orders', orders)
 routes.use('/payments', payments)
 routes.use('/productlines', productlines)
+routes.use('/auth', auth)
 
 export default routes
